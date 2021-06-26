@@ -1,0 +1,17 @@
+.root {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 200px;
+}
+
+.title-area {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+.h1 {
+    text-align: center;
+}
+
