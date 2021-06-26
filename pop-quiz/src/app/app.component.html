@@ -4,8 +4,18 @@
     <h1>Harry Potter Quiz</h1>
   </div>
 
-  <div class="main-area"></div>
+  <div class="main-area">
 
-  <div class="summery-area"></div>
+    <app-question-presenter 
+    *ngIf="!isQuizOver"
+    [question]="currentQuestion"
+    (answerChosen)="userSelectAnswer($event)"></app-question-presenter>
+
+    <app-quiz-over *ngIf="isQuizOver"></app-quiz-over>
+  </div>
+
+  <div class="summery-area">
+    <app-summary [questions]="summary"></app-summary>
+  </div>
 
 </div>

@@ -1,6 +1,6 @@
 export interface Question {
     caption: string;
     answers: string[];
-    corectAnswer: number;
+    correctAnswer: number;
     userAnswer: number;
 }

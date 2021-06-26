@@ -1,0 +1,18 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+.answer-box.correct {
+    color:green;
+}
+
+.answer-box.wrong {
+    color:red;
+}
+
+.answer-box {
+    background-color: indianred;
+}
