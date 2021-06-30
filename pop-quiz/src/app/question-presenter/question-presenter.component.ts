@@ -8,6 +8,7 @@ import { Questions } from '../model/questions';
   styleUrls: ['./question-presenter.component.css']
 })
 export class QuestionPresenterComponent implements OnInit {
+  
   @Input()
   question: Question;
 
@@ -23,5 +24,7 @@ export class QuestionPresenterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  
 
 }

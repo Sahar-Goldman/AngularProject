@@ -24,6 +24,7 @@ export class AppComponent {
     if(!this.isQuizOver){
       let answerIndex = this.currentQuestion.answers.indexOf(answer);
       this.currentQuestion.userAnswer = answerIndex;
+
       this.summary.push(this.currentQuestion);
       this.currentQustionIndex++;
       this.currentQuestion = Questions[this.currentQustionIndex];

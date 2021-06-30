@@ -5,14 +5,29 @@
     align-items: stretch;
 }
 
-.answer-box.correct {
-    color:green;
-}
+.answer-box {
+    margin:8px;
+    padding: 5px;
+    border-radius: 8px;
+    height: 60px;
+    border:1px solid midnightblue;
+} 
+
 
 .answer-box.wrong {
-    color:red;
+    background-color:rgba(255, 0, 0, 0.5);
 }
 
-.answer-box {
-    background-color: indianred;
+.answer-box.correct {
+    background-color:rgba(24, 212, 24, 0.5);
+}
+
+h4 {
+    margin: 0px;
+    font-size: 10px;
+}
+
+p {
+    margin: 0px;
+    font-size: 10px;
 }

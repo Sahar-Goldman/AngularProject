@@ -1,6 +1,21 @@
-h1 {
+ h2 {
     margin: 10px;
     text-align: center;
-    border-bottom: 1px solid pink;
+    border-bottom: 1px solid blue;
+    color:midnightblue;
 }
 
+li {
+    list-style-type: none;
+    margin:3px;
+    padding: 5px;
+    border-radius: 8px;
+    width: fit-content;
+    border:1px solid midnightblue;
+    background-color: rgba(175, 238, 238, 0.507);
+    cursor: pointer;
+}
+ 
+li:hover {
+    background-color: royalblue;
+}

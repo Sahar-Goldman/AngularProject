@@ -13,7 +13,7 @@ export class SummaryComponent implements OnInit {
   questions: Question[];
   
   constructor() { 
-    this.questions = Questions;
+    this.questions = [];
   }
 
   ngOnInit(): void {

@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+    color:midnightblue;
+    height:inherit;
+    width: fit-content;
+    border-radius: 8px;
+    margin:3px;
+    padding: 5px;
+    border:1px solid midnightblue;
+    margin-left: 300px;
+    margin-top: 200px;
+    background-color: rgba(175, 238, 238, 0.507);
+}
+

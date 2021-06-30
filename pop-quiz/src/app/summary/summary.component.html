@@ -1,12 +1,10 @@
 <div class="root">
-    <div class="answer-box" 
+    <div class="answer-box"
         *ngFor="let question of questions"
         [class.correct]="question.userAnswer === question.correctAnswer"
         [class.wrong]="question.userAnswer !== question.correctAnswer"
     >
-    <h5>{{question.caption}}</h5>
+    <h4 >{{question.caption}}</h4>
     <p>{{question.answers[question.userAnswer]}}</p>
-
     </div>
-
-</div>>
+</div>
