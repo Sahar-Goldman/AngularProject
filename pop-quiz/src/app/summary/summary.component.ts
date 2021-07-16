@@ -1,22 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Question } from '../model/question';
-import { Questions } from '../model/questions';
+import { StateService } from '../Services/state.service';
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.css']
 })
-export class SummaryComponent implements OnInit {
-
-  @Input()
-  questions: Question[];
+export class SummaryComponent {
+  questions!: Question[];
   
-  constructor() { 
-    this.questions = [];
+  constructor(private stateService : StateService) { 
   }
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
+    this.questions = this.stateService.getAnsweredQuestionsService();
   }
-
 }

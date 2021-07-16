@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
 import { Question } from '../model/question';
-import { Questions } from '../model/questions';
+import { StateService } from '../Services/state.service'
 
 @Component({
   selector: 'app-question-presenter',
@@ -8,23 +8,19 @@ import { Questions } from '../model/questions';
   styleUrls: ['./question-presenter.component.css']
 })
 export class QuestionPresenterComponent implements OnInit {
-  
-  @Input()
-  question: Question;
+    question: Question;
 
-  @Output()
-  answerChosen = new EventEmitter<string>();
+  constructor(private stateService : StateService) {
+    this.question = this.stateService.getNextQuestionService();
+  }
 
   onSelectAnswer(answer : string){
-    this.answerChosen.emit(answer);
+    this.stateService.updateAnswerService(answer);
+    if(!this.stateService.isQuizOverService())
+      this.question = this.stateService.getNextQuestionService();
   }
-  constructor() {
-    this.question = Questions[0];
-  }
-
+  
   ngOnInit(): void {
   }
-
-  
 
 }

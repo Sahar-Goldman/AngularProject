@@ -1,36 +1,24 @@
-import { Component } from '@angular/core';
-import { Question } from './model/question';
-import {Questions} from './model/questions';
+import { Component, OnInit } from '@angular/core';
+import { StateService } from './Services/state.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  currentQuestion: Question;
-  currentQustionIndex: number;
-  summary: Question[];
-  isQuizOver: boolean;
 
-  constructor() {
-    this.currentQustionIndex = 0;
-    this.currentQuestion = Questions[this.currentQustionIndex];
-    this.summary = [];
-    this.isQuizOver = false;
+export class AppComponent{
+  isQuizOver!: boolean;
+  title = 'pop-quiz-with-services';
+
+  constructor(private stateService : StateService) {
+    this.isQuizOver = stateService.isQuizOverService()
+  }
+  ngDoCheck(): void {
+    this.isQuizOver = this.stateService.isQuizOverService()
   }
 
-  userSelectAnswer(answer : string){
-    if(!this.isQuizOver){
-      let answerIndex = this.currentQuestion.answers.indexOf(answer);
-      this.currentQuestion.userAnswer = answerIndex;
-
-      this.summary.push(this.currentQuestion);
-      this.currentQustionIndex++;
-      this.currentQuestion = Questions[this.currentQustionIndex];
   
-      this.isQuizOver = !(this.currentQuestion);
-    }
-  }
-
 }
+
+

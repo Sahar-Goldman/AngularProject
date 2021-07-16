@@ -5,23 +5,12 @@
   </div>
 
   <div class="main-area">
-    <app-question-presenter
-      *ngIf="!isQuizOver"
-      [question]="currentQuestion"
-      (answerChosen)="userSelectAnswer($event)"
-    >
-    </app-question-presenter>
-
-    <app-quiz-over 
-      *ngIf="isQuizOver"
-    >
-    </app-quiz-over>
+    <app-question-presenter [hidden]="isQuizOver"></app-question-presenter>
+    <app-quiz-over [hidden]="!isQuizOver"></app-quiz-over>
   </div>
 
   <div class="summery-area">
-    <app-summary [questions]="summary">
-
-    </app-summary>
+    <app-summary></app-summary>
   </div>
 
 </div>
