@@ -1,7 +1,10 @@
-<h2>{{question.caption}}</h2>
-<ul>
-    <li *ngFor="let answer of question.answers"
-    (click)="onSelectAnswer(answer)"
-    >{{answer}}</li>
-</ul>
+<div *ngIf="(question | async) as readyQuestion">
+    <ul>
+        <h2>{{readyQuestion.caption}}</h2>
+        <li *ngFor="let answer of readyQuestion.answers; let i = index"
+        (click)="onSelectAnswer(i)"
+        >{{answer}}</li>
+    </ul>
+    
+</div>
 

@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { Question } from "../model/question";
 import { Questions } from "../model/questions";
 
@@ -6,38 +8,35 @@ import { Questions } from "../model/questions";
     providedIn: 'root'
 })
 export class StateService {
-    currentQuestion: Question
-    currentQustionIndex: number;
-    summary: Question[];
-    isQuizOver: boolean;
+    currentQustionIndex: BehaviorSubject<number>;
 
     constructor(){
-        this.currentQustionIndex = 0;
-        this.currentQuestion = Questions[this.currentQustionIndex];
-        this.summary = [];
-        this.isQuizOver = false;
+        this.currentQustionIndex = new BehaviorSubject<number>(0);
     }
 
-    getNextQuestionService(){
-        this.currentQuestion = Questions[this.currentQustionIndex];
-        this.currentQustionIndex++;
-        return this.currentQuestion;
+    public getNextQuestionService(): Observable<Question>{
+        return this.currentQustionIndex.pipe(
+                map(index => Questions[index])
+            );
     }
 
-    updateAnswerService(answer : string){
-        if(!this.isQuizOver){
-            let answerIndex = this.currentQuestion.answers.indexOf(answer);
-            this.currentQuestion.userAnswer = answerIndex;
-            this.summary.push(this.currentQuestion);
-            this.isQuizOver = (Questions.length <= this.currentQustionIndex)? true : false;
-        }
+    public updateAnswerService(answerIndex : number): Promise<void>{
+        let questionIndex = this.currentQustionIndex.value;
+        let questionToUpdate = Questions[questionIndex];
+        questionToUpdate.userAnswer = answerIndex;
+        this.currentQustionIndex.next(++questionIndex);
+        return Promise.resolve();
 }
 
-    isQuizOverService(){
-        return this.isQuizOver;
+    public isQuizOverService(): Observable<boolean>{
+        return this.currentQustionIndex.pipe(
+            map(index => Questions.length <= index)
+        );
     }
 
-    getAnsweredQuestionsService(){
-        return this.summary;
+    public getAnsweredQuestionsService(): Observable<Question[]>{
+        return this.currentQustionIndex.pipe(
+            map(index => Questions.filter(question => question.userAnswer !== -1))
+        );
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { StateService } from './Services/state.service';
 
 @Component({
@@ -7,16 +8,17 @@ import { StateService } from './Services/state.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{
-  isQuizOver!: boolean;
+export class AppComponent implements OnInit{
+  isQuizOver!: Observable<boolean>;
   title = 'pop-quiz-with-services';
 
   constructor(private stateService : StateService) {
-    this.isQuizOver = stateService.isQuizOverService()
   }
-  ngDoCheck(): void {
-    this.isQuizOver = this.stateService.isQuizOverService()
+
+  ngOnInit(): void {
+    this.isQuizOver = this.stateService.isQuizOverService();
   }
+
 
   
 }

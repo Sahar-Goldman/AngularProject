@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
+import { Observable } from 'rxjs';
 import { Question } from '../model/question';
 import { StateService } from '../Services/state.service'
 
@@ -7,20 +8,16 @@ import { StateService } from '../Services/state.service'
   templateUrl: './question-presenter.component.html',
   styleUrls: ['./question-presenter.component.css']
 })
-export class QuestionPresenterComponent implements OnInit {
-    question: Question;
+export class QuestionPresenterComponent implements OnInit{
+    question!: Observable<Question>;
 
   constructor(private stateService : StateService) {
+  }
+  ngOnInit(): void {
     this.question = this.stateService.getNextQuestionService();
   }
 
-  onSelectAnswer(answer : string){
-    this.stateService.updateAnswerService(answer);
-    if(!this.stateService.isQuizOverService())
-      this.question = this.stateService.getNextQuestionService();
+  onSelectAnswer(answerIndex : number){
+    this.stateService.updateAnswerService(answerIndex);
   }
-  
-  ngOnInit(): void {
-  }
-
 }

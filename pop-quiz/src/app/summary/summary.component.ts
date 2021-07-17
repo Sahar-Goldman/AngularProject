@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Question } from '../model/question';
 import { StateService } from '../Services/state.service';
 
@@ -7,13 +8,13 @@ import { StateService } from '../Services/state.service';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.css']
 })
-export class SummaryComponent {
-  questions!: Question[];
+export class SummaryComponent implements OnInit{
+  questions!: Observable<Question[]>;
   
   constructor(private stateService : StateService) { 
   }
 
-  ngDoCheck(): void {
+  ngOnInit(): void {
     this.questions = this.stateService.getAnsweredQuestionsService();
   }
 }
